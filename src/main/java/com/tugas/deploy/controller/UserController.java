@@ -34,11 +34,7 @@ public class UserController {
 
     @GetMapping("/home")
     public String homePage(Model model) {
-        List<User> homes = List.of(
-                new User(1, "Andi Saputra", "20230140101", "Laki-laki"),
-                new User(2, "Siti Aisyah", "20230140102", "Perempuan")
-        );
-        model.addAttribute("homes", homes);
+        model.addAttribute("homes", temporaryUsers);
         return "home";
     }
 
@@ -51,12 +47,9 @@ public class UserController {
     @PostMapping("/form")
     public String saveForm(@RequestParam String nama,
                            @RequestParam String nim,
-                           @RequestParam String jenisKelamin,
-                           Model model) {
+                           @RequestParam String jenisKelamin) {
         int no = temporaryUsers.size() + 1;
         temporaryUsers.add(new User(no, nama, nim, jenisKelamin));
-        model.addAttribute("temporaryUsers", temporaryUsers);
-        model.addAttribute("success", "Data mahasiswa berhasil ditambahkan sementara");
-        return "form";
+        return "redirect:/home";
     }
 }
