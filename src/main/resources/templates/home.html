@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .empty {
+            text-align: center;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-<h1>Login Berhasil 🎉</h1>
-<p>Selamat datang di halaman home 20230140123!</p>
+<div class="container">
+    <h1>MY Website 20210140019</h1>
+    <p>Selamat datang di aplikasi!</p>
+    <a href="/form">+ Input Data Mahasiswa</a>
 
-<a href="/">Logout</a>
+    <h2>Data Mahasiswa</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(homes)}">
+            <td colspan="4" class="empty">Belum ada data</td>
+        </tr>
+        <tr th:each="home : ${homes}">
+            <td th:text="${home.no}">1</td>
+            <td th:text="${home.nama}">Nama</td>
+            <td th:text="${home.nim}">NIM</td>
+            <td th:text="${home.jenisKelamin}">Jenis Kelamin</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top: 20px;"><a href="/">Logout</a></p>
+</div>
 </body>
 </html>
